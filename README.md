@@ -38,10 +38,10 @@ make get-data
 
 ### Installation du projet sans Make
 
-Il faut:
+Il faut :
 
 - copier le fichier .env.example en .env, et l'alimenter avec les bonnes valeurs
-- récupérer les container
+- récupérer les containers
 - build le container php
 - installer les dépendances
 - lancer les migrations de la base de données
@@ -66,7 +66,7 @@ Si vous n'avez pas curl, vous pouvez télécharger le fichier manuellement et le
 
 ## Importer les données
 
-Pour importer les données dans la base de données, il faut lancer la commande suivante:
+Pour importer les données dans la base de données, il faut lancer la commande suivante :
 
 ```bash
 docker compose run --rm php bin/console import:card
@@ -74,14 +74,14 @@ docker compose run --rm php bin/console import:card
 
 ## Documentation de l'API
 
-La documentation de l'API est disponible à l'adresse suivante: [http://localhost/api/doc](http://localhost/api/doc). Pensez à adapter l'adresse si vous n'êtes pas en local, ou sur un autre port que le 80.  
+La documentation de l'API est disponible à l'adresse suivante : [http://localhost/api/doc](http://localhost/api/doc). Pensez à adapter l'adresse si vous n'êtes pas en local, ou sur un autre port que le 80.  
 La documentation est générée avec [Swagger](https://swagger.io/) en respectant la norme [OpenAPI](https://swagger.io/specification/).  
 Vous pouvez voir le controller ApiCardController.php pour un premier exemple.
 
 ## Lancer les linters
 
-Nous avons dans ce projets 3 linters: phpstan, phpcs et eslint.
-Pour les lancer il faut utiliser les commandes suivantes:
+Nous avons dans ce projet 3 linters: phpstan, phpcs et eslint.
+Pour les lancer il faut utiliser les commandes suivantes :
 
 ```bash
 docker compose run --rm php composer run-script phpstan
@@ -96,7 +96,7 @@ docker compose run --rm php composer run-script phpcs:fix
 docker compose run --rm vite npm run lint:fix
 ```
 
-Les différente documentation des linters:
+Les différentes documentations des linters:
 
 - phpstan : <https://phpstan.org/>
 - phpcs : <https://github.com/squizlabs/PHP_CodeSniffer>
@@ -104,7 +104,7 @@ Les différente documentation des linters:
 
 ## Lancer le projet
 
-Une fois le projet installé, il suffit de faire:
+Une fois le projet installé, il suffit de faire :
 
 ```bash
 docker compose up
