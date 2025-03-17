@@ -21,6 +21,11 @@ export const routes = [
         path: '/search',
         component: () => import('./pages/SearchPage.vue'),
     },
+    {
+        name: 'cards-pagination',
+        path: '/cards/pagination',
+        component: () => import('./pages/CardsPaginationPage.vue'),
+    }
 ];
 
 const router = createRouter({

@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -20,14 +21,29 @@ class ApiCardController extends AbstractController
         private readonly LoggerInterface $logger
     ) {
     }
+
     #[Route('/all', name: 'List all cards', methods: ['GET'])]
-    #[OA\Put(description: 'Return all cards in the database')]
-    #[OA\Response(response: 200, description: 'List all cards')]
-    public function cardAll(): Response
+    #[OA\Get(description: 'Return all cards or paginated cards from the database')]
+    #[OA\Parameter(name: 'page', description: 'Page number (0-indexed, optional)', in: 'query', schema: new OA\Schema(type: 'integer'))]
+    #[OA\Response(response: 200, description: 'List all or paginated cards')]
+    public function cardAll(Request $request): Response
     {
-        ini_set('memory_limit', '2G');
-        $cards = $this->entityManager->getRepository(Card::class)->findAll();
+      ini_set('memory_limit', '2G');
+
+      $repository = $this->entityManager->getRepository(Card::class);
+
+      if (!$request->query->has('page')) {
+        $cards = $repository->findAll();
         return $this->json($cards);
+      }
+
+      $page = max(0, $request->query->getInt('page', 0));
+      $itemsPerPage = 100;
+      $offset = $page * $itemsPerPage;
+
+      $cards = $repository->findBy([], [], $itemsPerPage, $offset);
+
+      return $this->json($cards);
     }
 
     #[Route('/{uuid}', name: 'Show card', methods: ['GET'])]
