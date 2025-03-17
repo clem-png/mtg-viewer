@@ -63,7 +63,7 @@ class ImportCardCommand extends Command
                 $this->addCard($row);
             }
 
-            if ($i % 2000 === 0) {
+            if ($i % 30000 === 0) {
                 $this->entityManager->flush();
                 $this->entityManager->clear();
                 $progressIndicator->advance();

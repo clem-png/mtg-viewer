@@ -25,6 +25,7 @@ class ApiCardController extends AbstractController
     #[OA\Response(response: 200, description: 'List all cards')]
     public function cardAll(): Response
     {
+        ini_set('memory_limit', '2G');
         $cards = $this->entityManager->getRepository(Card::class)->findAll();
         return $this->json($cards);
     }
